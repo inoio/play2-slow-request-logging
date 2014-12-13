@@ -1,0 +1,29 @@
+<configuration>
+    
+  <conversionRule conversionWord="coloredLevel" converterClass="play.api.Logger$ColoredLevel" />
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%date %-5level [%thread] %logger{55} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="SLOW_REQUEST_LOG_STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%date SLOW %message%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- additivity=false ensures access log data only goes to the access log -->
+  <logger name="SlowRequestLog" level="INFO" additivity="false">
+    <appender-ref ref="SLOW_REQUEST_LOG_STDOUT" />
+  </logger>
+  
+  <logger name="play" level="INFO" />
+  <logger name="application" level="DEBUG"/>
+
+  <root level="INFO">
+    <appender-ref ref="STDOUT" />
+  </root>
+
+</configuration>
